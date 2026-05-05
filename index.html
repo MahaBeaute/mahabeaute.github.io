@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maha Beauté</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== DARK MODE VARIABLES ===== */
+:root {
+    --bg: linear-gradient(135deg, #f3dede, #e8c7c7);
+    --text: #7a5c5c;
+}
+
+body.dark {
+    --bg: #111;
+    --text: #eee;
+}
+
+/* ================= INTRO ================= */
+#intro {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #ffffff 0%, #f7e6e6 40%, #e8c7c7 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+    animation: introFade 1s ease forwards;
+    animation-delay: 4.8s;
+    pointer-events: auto;
+}
+
+.flash {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    animation: flashAnim 1.5s ease;
+}
+
+@keyframes flashAnim {
+    0% {opacity: 0;}
+    20% {opacity: 0.8;}
+    100% {opacity: 0;}
+}
+
+.shimmer {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, gold, transparent);
+    top: 50%;
+    animation: shimmerMove 2.5s infinite;
+}
+
+@keyframes shimmerMove {
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(100%);}
+}
+
+.light {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 60%);
+    animation: moveLight 3s infinite;
+}
+
+@keyframes moveLight {
+    0% {transform: translate(-30%, -30%) scale(1);}
+    50% {transform: translate(30%, 30%) scale(1.3);}
+    100% {transform: translate(-30%, -30%) scale(1);}
+}
+
+.intro-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.intro-logo {
+    width: 160px;
+    filter: drop-shadow(0 0 30px gold);
+    animation: floatLogo 2.8s infinite ease-in-out;
+}
+
+@keyframes floatLogo {
+    0% {transform: translateY(0);}
+    50% {transform: translateY(-15px);}
+    100% {transform: translateY(0);}
+}
+
+.intro-content h2 {
+    font-family: 'Playfair Display';
+    font-size: 38px;
+    color: #6b4f4f;
+}
+
+.intro-content p {
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: #8b6b6b;
+}
+
+.loading {
+    width: 200px;
+    height: 3px;
+    background: rgba(0,0,0,0.1);
+    margin: 20px auto;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 100%;
+    background: gold;
+    animation: load 2.5s infinite;
+}
+
+@keyframes load {
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(250%);}
+}
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* particles */
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: gold;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float {
+    0% {transform: translateY(100vh);}
+    100% {transform: translateY(-10vh);}
+}
+
+.container {
+    padding: 60px 20px;
+}
+
+.logo {
+    width: 200px;
+    filter: drop-shadow(0 0 25px gold);
+}
+
+h1 {
+    font-family: 'Playfair Display';
+    font-size: 38px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 12px auto;
+    padding: 16px;
+    width: 85%;
+    max-width: 320px;
+    background: rgba(255,255,255,0.65);
+    border-radius: 22px;
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.3s;
+    backdrop-filter: blur(6px);
+}
+
+.link:hover {
+    transform: scale(1.06);
+    background: #d8a7a7;
+    color: white;
+}
+
+.rdv {
+    background: #25D366;
+    color: white;
+}
+
+/* DARK BUTTON */
+.toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: #000;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* POPUP */
+.popup {
+    position: fixed;
+    bottom: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 350px;
+    background: white;
+    padding: 20px;
+    border-radius: 22px;
+    transition: 0.4s;
+}
+
+.popup.active {
+    bottom: 20px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #d8a7a7;
+    color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleDark()">🌙</div>
+
+<div id="intro">
+    <div class="flash"></div>
+    <div class="light"></div>
+    <div class="shimmer"></div>
+
+    <div class="intro-content">
+        <img src="logo.png" class="intro-logo">
+        <h2>Maha Beauté</h2>
+        <p>Haute Beauté • Élégance • Prestige</p>
+        <div class="loading"></div>
+    </div>
+</div>
+
+<script>
+for(let i=0;i<25;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDelay=Math.random()*6+"s";
+    document.body.appendChild(p);
+}
+</script>
+
+<div class="container">
+
+<img src="logo.png" class="logo">
+
+<h1>Maha Beauté</h1>
+<div>Salon de Coiffure & Beauté Féminine</div>
+
+<a class="link" href="https://www.instagram.com/mahaiheb/" target="_blank">
+<i class="fab fa-instagram"></i> Instagram</a>
+
+<a class="link" href="https://www.facebook.com/maha.meknessi" target="_blank">
+<i class="fab fa-facebook"></i> Facebook</a>
+
+<a class="link rdv" href="https://wa.me/21652659117?text=Bonjour%20je%20veux%20réserver" target="_blank">
+<i class="fab fa-whatsapp"></i> Prendre RDV</a>
+
+<a class="link" href="tel:+21652659117">
+<i class="fas fa-phone"></i> Appeler</a>
+
+<a class="link" href="https://maps.app.goo.gl/5uquD8G81YzD6Z4F7" target="_blank">
+<i class="fas fa-location-dot"></i> Localisation</a>
+
+<a class="link" href="javascript:void(0)" onclick="openPopup()">
+<i class="fas fa-calendar"></i> Info Réservation</a>
+
+</div>
+
+<div class="popup" id="popup">
+<h3>Réservation</h3>
+<p>Contactez-nous via WhatsApp 💕</p>
+<button onclick="closePopup()">Fermer</button>
+</div>
+
+<script>
+
+function openPopup(){
+    document.getElementById("popup").classList.add("active");
+}
+
+function closePopup(){
+    document.getElementById("popup").classList.remove("active");
+}
+
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+
+setTimeout(() => {
+    const intro = document.getElementById("intro");
+    intro.style.opacity = "0";
+    intro.style.pointerEvents = "none";
+    setTimeout(() => intro.style.display = "none", 1000);
+}, 4500);
+
+</script>
+
+</body>
+</html>
